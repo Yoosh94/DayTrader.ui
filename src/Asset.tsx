@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Button} from 'antd';
 import { Typography } from 'antd';
 import { Row, Col } from 'antd';
@@ -13,6 +13,7 @@ type AssetProps = {
 }
 
 export const Asset= ({name, lastBoughtPrice, currentPrice}:AssetProps) => {
+    let [lastBoughtPrices, setLastBoughtPrices] = useState(0);
 return(
     <div>
         <Row>
