@@ -1,26 +1,26 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import {Asset} from './Asset';
+import 'antd/dist/antd.css'
+import { Layout, Row, Col } from 'antd';
+
+const { Header, Footer, Sider, Content } = Layout;
+
 
 function App() {
   return (
     <div className="App">
-      {/* <header className="App-header"> */}
-        {/* <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header> */}
-      <Asset name='LTC'/>
+      <Layout>
+      <Header>Header</Header>
+      <Content>
+        <Row>
+          <Col span={24}>
+            <Asset name='LTC' lastBoughtPrice={120.99} currentPrice={200.00}/>
+          </Col>
+        </Row>
+      </Content>
+      <Footer>Footer</Footer>
+    </Layout>
     </div>
   );
 }
