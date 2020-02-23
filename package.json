@@ -44,5 +44,6 @@
     "eslint-plugin-react": "^7.18.3",
     "react-redux": "^7.2.0",
     "redux": "^4.0.5"
-  }
+  },
+  "proxy": "https://localhost:5001"
 }

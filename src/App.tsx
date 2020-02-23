@@ -15,7 +15,12 @@ function App() {
       <Content>
         <Row>
           <Col span={24}>
-            <Asset name='LTC' lastBoughtPrice={120.99} currentPrice={200.00}/>
+            <Asset name='LTC'/>
+          </Col>
+        </Row>
+        <Row>
+          <Col span={24}>
+            <Asset name='POWR'/>
           </Col>
         </Row>
       </Content>
