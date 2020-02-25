@@ -17,10 +17,11 @@ export const Asset = ({ name }: AssetProps) => {
     recursiveCall(() => {
         fetch(`https://localhost:5001/api/trade/${name}-AUD`).then(response => { return response.json() })
             .then(body => {
-                setLastBoughtPrices(body[0].price);
+                const boughtTrades = body.filter((trades: { side: string; }) => trades.side === 'Bid');
+                setLastBoughtPrices(boughtTrades[0].price);
             })
             .catch((error) => console.log(error));
-
+        
             fetch(`https://localhost:5001/api/market/${name}-AUD`).then(response => { return response.json() })
             .then(body => {
                 setCurrentPrice(body.lastPrice)

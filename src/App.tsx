@@ -23,6 +23,21 @@ function App() {
             <Asset name='POWR'/>
           </Col>
         </Row>
+        <Row>
+          <Col span={24}>
+            <Asset name='ETC'/>
+          </Col>
+        </Row>
+        <Row>
+          <Col span={24}>
+            <Asset name='BCH'/>
+          </Col>
+        </Row>
+        <Row>
+          <Col span={24}>
+            <Asset name='BTC'/>
+          </Col>
+        </Row>
       </Content>
       <Footer>Footer</Footer>
     </Layout>
