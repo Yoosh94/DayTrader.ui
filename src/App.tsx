@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import {Asset} from './Asset';
 import 'antd/dist/antd.css'
-import { Layout, Row, Col } from 'antd';
+import { Layout, Row, Col, Divider } from 'antd';
 
 const { Header, Footer, Sider, Content } = Layout;
 
@@ -18,21 +18,25 @@ function App() {
             <Asset name='LTC'/>
           </Col>
         </Row>
+        <Divider/>
         <Row>
           <Col span={24}>
             <Asset name='POWR'/>
           </Col>
         </Row>
+        <Divider/>
         <Row>
           <Col span={24}>
             <Asset name='ETC'/>
           </Col>
         </Row>
+        <Divider/>
         <Row>
           <Col span={24}>
             <Asset name='BCH'/>
           </Col>
         </Row>
+        <Divider/>
         <Row>
           <Col span={24}>
             <Asset name='BTC'/>
