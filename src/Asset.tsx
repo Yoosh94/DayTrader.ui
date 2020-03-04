@@ -1,41 +1,39 @@
 import React, { useState, useEffect } from 'react';
-import { Button } from 'antd';
-import { Typography } from 'antd';
-import { Row, Col } from 'antd';
+import { Typography, Row, Col } from 'antd';
 import recursiveCall from './recursiveCall'
 import 'antd/dist/antd.css'
-import { stringify } from 'querystring';
 
 const { Text } = Typography;
 
 type AssetProps = {
-    name: string
+    name: string;
 }
 
-export const Asset = ({ name }: AssetProps) => {
-    let [lastBoughtPrices, setLastBoughtPrices] = useState(0);
-    let [currentPrice, setCurrentPrice] = useState(0);
-    let [fee, setFee] = useState(0);
-    let [percentage, setPercentage] = useState(0.00);
-    useEffect(()=>{
-        const percentage = ((currentPrice - lastBoughtPrices)/lastBoughtPrices) * 100;
+export const Asset: React.FC<AssetProps> = (props) => {
+    const { name } = props;
+    const [lastBoughtPrices, setLastBoughtPrices] = useState(0);
+    const [currentPrice, setCurrentPrice] = useState(0);
+    const [fee, setFee] = useState(0);
+    const [percentage, setPercentage] = useState(0.00);
+    useEffect(() => {
+        const percentage = ((currentPrice - lastBoughtPrices) / lastBoughtPrices) * 100;
         setPercentage(percentage);
-    })
+    }, [currentPrice, lastBoughtPrices]);
     recursiveCall(() => {
         fetch(`https://localhost:5001/api/trade/${name}-AUD`).then(response => { return response.json() })
             .then(body => {
-                const boughtTrades = body.filter((trades: { side: string; orderId:string;}) => trades.side === 'Bid');
+                const boughtTrades = body.filter((trades: { side: string; orderId: string }) => trades.side === 'Bid');
                 setLastBoughtPrices(boughtTrades[0].price);
                 let fee = 0.00;
-                const transaction = boughtTrades.filter((trades : {orderId:string;}) => trades.orderId === boughtTrades[0].orderId);
-                transaction.forEach((element: { fee: string; }) => {
+                const transaction = boughtTrades.filter((trades: { orderId: string }) => trades.orderId === boughtTrades[0].orderId);
+                transaction.forEach((element: { fee: string }) => {
                     fee = fee + parseFloat(element.fee);
                 });
                 setFee(fee);
             })
             .catch((error) => console.log(error));
-        
-            fetch(`https://localhost:5001/api/market/${name}-AUD`).then(response => { return response.json() })
+
+        fetch(`https://localhost:5001/api/market/${name}-AUD`).then(response => { return response.json() })
             .then(body => {
                 setCurrentPrice(body.lastPrice)
             })
