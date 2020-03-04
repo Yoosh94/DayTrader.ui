@@ -8,40 +8,25 @@ const { Header, Footer, Content } = Layout;
 
 
 const App: React.FC = () => {
+  const assetList = ['LTC', 'POWR', 'ETC', 'BCH', 'BTC', 'XRP']
+  const assets = assetList.map((asset) => {
+    return (
+      <div key={asset}>
+        <Row>
+          <Col span={24}>
+            <Asset name={asset} />
+          </Col>
+        </Row>
+        <Divider />
+      </div>
+    );
+  });
   return (
     <div className="App">
       <Layout>
         <Header>Header</Header>
         <Content>
-          <Row>
-            <Col span={24}>
-              <Asset name='LTC' />
-            </Col>
-          </Row>
-          <Divider />
-          <Row>
-            <Col span={24}>
-              <Asset name='POWR' />
-            </Col>
-          </Row>
-          <Divider />
-          <Row>
-            <Col span={24}>
-              <Asset name='ETC' />
-            </Col>
-          </Row>
-          <Divider />
-          <Row>
-            <Col span={24}>
-              <Asset name='BCH' />
-            </Col>
-          </Row>
-          <Divider />
-          <Row>
-            <Col span={24}>
-              <Asset name='BTC' />
-            </Col>
-          </Row>
+          {assets}
         </Content>
         <Footer>Footer</Footer>
       </Layout>

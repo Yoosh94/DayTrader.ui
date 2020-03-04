@@ -15,6 +15,8 @@ export const Asset: React.FC<AssetProps> = (props) => {
     const [currentPrice, setCurrentPrice] = useState(0);
     const [fee, setFee] = useState(0);
     const [percentage, setPercentage] = useState(0.00);
+    const [availableBalance, setAvailableBalance] = useState(0);
+    const [lockedBalance, setLockedBalance] = useState(0);
     useEffect(() => {
         const percentage = ((currentPrice - lastBoughtPrices) / lastBoughtPrices) * 100;
         setPercentage(percentage);
@@ -38,6 +40,15 @@ export const Asset: React.FC<AssetProps> = (props) => {
                 setCurrentPrice(body.lastPrice)
             })
             .catch((error) => console.log(error));
+
+        fetch(`https://localhost:5001/api/account/balances`).then(response => { return response.json() })
+            .then(body => {
+                const balance = body.find((balance: { assetName: string; available: string; locked: string }) => balance.assetName === name)
+                console.log(balance);
+                setAvailableBalance(parseFloat(balance.available));
+                setLockedBalance(parseFloat(balance.locked));
+            })
+            .catch((error) => console.log(error));
     }, 10000)
     return (
         <div>
@@ -58,6 +69,12 @@ export const Asset: React.FC<AssetProps> = (props) => {
             <Row>
                 <Col offset={3} span={4}>
                     <Text strong>Current price: ${currentPrice}</Text>
+                </Col>
+                <Col offset={2} span={3}>
+                    <Text strong>Available Balance: {availableBalance}</Text>
+                </Col>
+                <Col offset={3} span={3}>
+                    <Text strong>Locked: {lockedBalance}</Text>
                 </Col>
             </Row>
         </div>
