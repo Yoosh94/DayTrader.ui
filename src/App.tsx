@@ -1,7 +1,6 @@
 import React from 'react';
 import './App.css';
 import { Asset } from './Asset';
-import 'antd/dist/antd.css'
 import { Layout, Row, Col, Divider } from 'antd';
 
 const { Header, Footer, Content } = Layout;
